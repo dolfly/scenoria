@@ -7,7 +7,7 @@
 # GitHub account, token or cookie is needed to install from it.
 #
 #   bash install.sh --install             # latest release
-#   bash install.sh --install v0.0.1      # one specific tag
+#   bash install.sh --install v0.0.2      # one specific tag
 #   bash install.sh --list                # print available versions
 #   bash install.sh                       # pick a tag from a menu
 #
@@ -17,7 +17,7 @@
 #   scenoria-<os>-<arch>-<version>.zip    windows
 #   SHA256SUMS                            every file above
 #
-# for example scenoria-linux-amd64-0.0.1.gz. The download is only installed
+# for example scenoria-linux-amd64-0.0.2.gz. The download is only installed
 # after its sha256 matched SHA256SUMS.
 #
 # Optional environment:
@@ -29,7 +29,7 @@
 #
 # SCENORIA_OS/SCENORIA_ARCH also make the other platform branches testable from a
 # single machine, e.g. SCENORIA_OS=linux SCENORIA_ARCH=armv8 install.sh
-# --install v0.0.1.
+# --install v0.0.2.
 
 set -u
 
@@ -238,7 +238,7 @@ mismatch instead of installing."
     esac
 
     # The windows archives keep the versioned file name inside the zip
-    # (scenoria-windows-amd64-0.0.1.exe), the unix ones are a plain gzip stream,
+    # (scenoria-windows-amd64-0.0.2.exe), the unix ones are a plain gzip stream,
     # so look for the binary under every name the packaging may have used.
     native=""
     for candidate in "${dir}/${BIN}" "${dir}/${BIN}.exe" "${dir}/${name%.*}" "${dir}/${name%.*}.exe"; do
@@ -273,7 +273,7 @@ list_versions() {
     versions="$(version_list)" || die "cannot read the version list from ${API}/releases
 The public mirror needs no token, so this is a network problem or the anonymous
 GitHub API rate limit. Install a known version directly instead:
-  bash $0 --install ${SCENORIA_TAG:-v0.0.1}"
+  bash $0 --install ${SCENORIA_TAG:-v0.0.2}"
     [ -n "$versions" ] || die "${REPO} lists no releases; nothing to install yet"
     echo "$versions"
 }
@@ -312,7 +312,7 @@ main() {
         if [ -z "$tag" ]; then
             tag="$(latest_tag)" || die "cannot resolve the latest tag from https://github.com/${REPO}/releases/latest
 check network access to github.com, or pin a version:
-  bash $0 --install v0.0.1"
+  bash $0 --install v0.0.2"
         fi
         install_scenoria "$tag"
         ;;
